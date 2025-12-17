@@ -5,6 +5,7 @@ import { fromDateInputValue, toDateInputValue } from "../utils/date";
 import { useUpdateUserMutation } from "../features/users/usersApi";
 import { useDispatch } from "react-redux";
 import { updateAuthUser } from "../features/auth/authSlice";
+import { useAppSelector } from "../app/hooks";
 
 interface UseEditEmployeeProps {
   employee: Employee;
@@ -15,6 +16,7 @@ export function useEditEmployee({
   employee,
   setShowEditForm,
 }: UseEditEmployeeProps) {
+  const { user: currentUser } = useAppSelector((state) => state.auth);
   const [updateUser, { isLoading, error }] = useUpdateUserMutation();
   const dispatch = useDispatch();
 
@@ -74,14 +76,15 @@ export function useEditEmployee({
         updates: employeePayload,
       }).unwrap();
       console.log("updated user : ", user.user);
-      dispatch(
-        updateAuthUser({
-          email: user.user.email,
-          first_name: user.user.first_name,
-          last_name: user.user.last_name,
-          user_avatar: user.user.user_avatar,
-        })
-      );
+      if (currentUser?.id === user.user._id)
+        dispatch(
+          updateAuthUser({
+            email: user.user.email,
+            first_name: user.user.first_name,
+            last_name: user.user.last_name,
+            user_avatar: user.user.user_avatar,
+          })
+        );
       setShowEditForm(false);
     } catch (err) {
       console.error("Failed to update user", err);
