@@ -1,0 +1,7 @@
+{
+  "rewrites": [{ "source": "/(.*)", "destination": "/" }],
+  "build": {
+    "env": {},
+    "nodeVersion": "22.x"
+  }
+}

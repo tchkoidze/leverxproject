@@ -1,0 +1,88 @@
+/* login & signup page */
+@use "variables" as *;
+@use "mixins" as *;
+
+.auth-form {
+  width: 100%;
+  min-height: 100vh;
+  // display: none;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.auth-card {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 20px;
+  background-color: white;
+  padding: 20px;
+  border-radius: 8px;
+  width: 100%;
+  max-width: 90%;
+}
+
+.rememberme-container {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.signin-btn {
+  display: inline-block;
+  width: 100%;
+  background: $blue-100;
+  border: none;
+  color: white;
+  padding: 10px 12px;
+  border-radius: 8px;
+  cursor: pointer;
+  text-align: center;
+  transition: all 0.3s ease;
+
+  @include hover-active($blue-300);
+}
+
+@media (min-width: 768px) {
+  #login-form {
+    max-width: 70%;
+  }
+}
+
+@media (min-width: 1024px) {
+  #login-form {
+    max-width: 500px;
+  }
+}
+
+.sign-form-labelBox h2 {
+  color: $blue-100;
+}
+
+.sign-form-labelBox p {
+  font-size: 1rem;
+  margin-top: 8px;
+}
+
+.sign-form-labelBox p a {
+  text-decoration: none;
+  color: $blue-100;
+}
+
+@media (min-width: 768px) {
+  .auth-card {
+    max-width: 70%;
+  }
+}
+
+@media (min-width: 1024px) {
+  .auth-card {
+    max-width: 500px;
+  }
+}
+
+@media (prefers-color-scheme: dark) {
+  .auth-card {
+    background-color: $bg-secondary;
+  }
+}

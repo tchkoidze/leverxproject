@@ -1,0 +1,6 @@
+@mixin hover-active($color) {
+  &:hover,
+  &:active {
+    background-color: $color;
+  }
+}
