@@ -17,9 +17,6 @@ const router = createBrowserRouter([
   {
     path: "/",
     element: (
-      // <AuthProvider>
-      //   <App />
-      // </AuthProvider>
       <Provider store={store}>
         <App />
       </Provider>
