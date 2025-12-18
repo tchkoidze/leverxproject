@@ -109,9 +109,6 @@ function Employees() {
         </div>
       </aside>
 
-      {/* -- hidden checkbox to control visibility -- */}
-      {/* <input type="checkbox" id="search-toggle" hidden defaultChecked={true} /> */}
-
       {/* <!-- right side (amployees list section)--> */}
       <section className="employee-area">
         <input
