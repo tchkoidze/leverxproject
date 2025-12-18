@@ -17,6 +17,7 @@ function Employees() {
   );
   const [openSearchPanel, setOpenSearchPanel] = useState(false);
   const [activeTab, setActiveTab] = useState<"basic" | "advanced">("basic");
+  const [viewMode, setViewMode] = useState<"grid" | "list">("grid");
 
   const {
     data: displayedEmployees,
@@ -128,7 +129,7 @@ function Employees() {
           </p>
 
           <div className="layout-btns">
-            <label htmlFor="grid-view">
+            <label onClick={() => setViewMode("grid")} htmlFor="grid-view">
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 width="24"
@@ -146,7 +147,7 @@ function Employees() {
               </svg>
             </label>
 
-            <label htmlFor="list-view">
+            <label onClick={() => setViewMode("list")} htmlFor="list-view">
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 width="24"
