@@ -112,16 +112,6 @@ function Employees() {
 
       {/* <!-- right side (amployees list section)--> */}
       <section className="employee-area">
-        <input
-          type="radio"
-          name="layout"
-          id="grid-view"
-          // checked
-          hidden
-          defaultChecked={true}
-        />
-        <input type="radio" name="layout" id="list-view" hidden />
-
         <div className="layout-conrollers-box">
           <p>
             <span className="count">{displayedEmployees?.length}</span>{" "}
@@ -129,7 +119,11 @@ function Employees() {
           </p>
 
           <div className="layout-btns">
-            <label onClick={() => setViewMode("grid")} htmlFor="grid-view">
+            <button
+              onClick={() => setViewMode("grid")}
+              className={`grid-view ${viewMode}`}
+              //  htmlFor="grid-view"
+            >
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 width="24"
@@ -145,9 +139,13 @@ function Employees() {
                 <rect width="7" height="7" x="14" y="14" rx="1" />
                 <rect width="7" height="7" x="3" y="14" rx="1" />
               </svg>
-            </label>
+            </button>
 
-            <label onClick={() => setViewMode("list")} htmlFor="list-view">
+            <button
+              onClick={() => setViewMode("list")}
+              className={`list-view ${viewMode}`}
+              // htmlFor="list-view"
+            >
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 width="24"
@@ -162,13 +160,16 @@ function Employees() {
                 <path d="M4 12h16" />
                 <path d="M4 19h16" />
               </svg>
-            </label>
+            </button>
           </div>
         </div>
 
         {displayedEmployees && displayedEmployees?.length > 0 ? (
-          <div id="employees-container" className="employee-grid-list">
-            <div className="grid-card">
+          <div
+            id="employees-container"
+            className={`employee-grid-list ${viewMode}`}
+          >
+            <div className={`grid-card ${viewMode}`}>
               <div>
                 <img src={circleIcon} alt="circle" />
                 <span>Photo</span>
@@ -188,19 +189,21 @@ function Employees() {
               </div>
             </div>
 
-            {/* {employees &&
-            employees.map((employee) => ( */}
             {displayedEmployees.map((employee) => (
               <div
                 onClick={() => navigate(`/users/${employee._id}`)}
                 key={employee._id}
-                className="employee-card"
+                className={`employee-card ${viewMode}`}
               >
-                <img
-                  src={employee.user_avatar || avatarPlaceholderDark}
-                  alt="employee_avatar"
-                  className="avatar"
-                />
+                <div>
+                  <img
+                    src={employee.user_avatar || avatarPlaceholderDark}
+                    alt="employee_avatar"
+                    className="avatar"
+                  />
+
+                  <h3 className="emp-name">{`${employee.first_name} ${employee.last_name}`}</h3>
+                </div>
 
                 <h3 className="emp-name">{`${employee.first_name} ${employee.last_name}`}</h3>
 

@@ -246,6 +246,9 @@
 .layout-btns button {
   border: none;
   background-color: transparent;
+  cursor: pointer;
+  color: $gray-700;
+  transition: all 0.3s ease;
 }
 
 .layout-btns label {
@@ -264,6 +267,14 @@
   color: $blue-100;
 }
 
+.layout-conrollers-box .grid-view.grid {
+  color: $blue-100;
+}
+
+.layout-conrollers-box .list-view.list {
+  color: $blue-100;
+}
+
 .employee-grid-list {
   display: grid;
 
@@ -276,11 +287,19 @@
 #list-view:checked ~ .employee-grid-list {
   grid-template-columns: 1fr;
 }
+.employee-grid-list.list {
+  grid-template-columns: 1fr;
+}
 
 @media (min-width: 768px) {
   .layout-btns {
     display: block;
   }
+  .employee-grid-list {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+@media (min-width: 1024px) {
   .employee-grid-list {
     grid-template-columns: repeat(3, 1fr);
   }
@@ -291,7 +310,7 @@
 }
 
 @media (min-width: 768px) {
-  #list-view:checked ~ .employee-grid-list > .grid-card {
+  .employee-grid-list.list > .grid-card {
     display: grid;
     grid-template-columns: 1fr 2fr 1fr 1fr;
     border-radius: 4px;
@@ -316,33 +335,50 @@
   padding: 25px;
   text-align: center;
   box-shadow: 0 2px 6px $black-6;
+
+  > div:first-child {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+
+  > h3 {
+    display: none;
+  }
 }
 
-// #list-view:checked ~ .employee-grid-list .employee-card {
-//   display: grid;
-//   grid-template-columns: 1fr 2fr 1fr 1fr;
-//   align-items: center;
-// }
-
 @media (min-width: 768px) {
-  #list-view:checked ~ .employee-grid-list .employee-card {
+  .employee-card.list {
     display: grid;
     grid-template-columns: 1fr 2fr 1fr 1fr;
     align-items: center;
+
+    > div:first-child {
+      h3 {
+        display: none;
+      }
+    }
+
+    h3 {
+      display: block;
+      text-align: left;
+    }
   }
 
-  #list-view:checked ~ .employee-grid-list .employee-card h3 {
-    text-align: left;
+  .employee-card.grid {
+    > div:first-child {
+      flex-direction: column;
+    }
+
+    > h3 {
+      display: none;
+    }
   }
 }
 
-// #list-view:checked ~ .employee-grid-list .employee-card h3 {
-//   text-align: left;
-// }
-
 .employee-card .avatar {
   width: 90px;
-  margin-bottom: 10px;
+  // margin-bottom: 10px;
 }
 
 .employee-card h3 {
@@ -354,20 +390,18 @@
   height: 2px;
   background-color: $gray-100;
   margin: 10px 0 20px 0;
+
   @media (min-width: 768px) {
     margin: 30px 0 20px 0;
   }
 }
-
-// #list-view:checked ~ .employee-grid-list .employee-card .splitter {
-//   display: none;
-// }
 
 .info {
   display: flex;
   justify-content: center;
   gap: 12px;
   font-size: 13px;
+  color: $blue-200;
   //color: #666;
 }
 
@@ -378,32 +412,27 @@
   text-transform: capitalize;
 }
 
-// #list-view:checked ~ .employee-grid-list .employee-card .info {
-//   display: none;
-// }
-// #grid-view:checked ~ .employee-grid-list .employee-card > .employee-info {
-//   display: none;
-// }
-
-#list-view:checked ~ .employee-grid-list .employee-card > .employee-info {
+//----
+.employee-card.list > .employee-info {
   display: none;
 }
-
-#grid-view:checked ~ .employee-grid-list .employee-card > .employee-info {
+.employee-card.grid > .employee-info {
   display: none;
 }
 
 @media (min-width: 768px) {
-  #list-view:checked ~ .employee-grid-list .employee-card .info {
+  //---
+  .info {
+    color: black;
+  }
+  .employee-card.list .info {
     display: none;
   }
-
-  #list-view:checked ~ .employee-grid-list .employee-card > .employee-info {
+  .employee-card.list > .employee-info {
     display: block;
     text-transform: capitalize;
   }
-
-  #list-view:checked ~ .employee-grid-list .employee-card .splitter {
+  .employee-card.list .splitter {
     display: none;
   }
 }
@@ -419,11 +448,6 @@
   padding-top: 20px;
   padding-bottom: 150px;
 }
-
-/* --show no found page -- */
-// #search-toggle:checked ~ section .not-found-page {
-//   display: flex;
-// }
 
 .not-found-page h3 {
   margin: 15px 0 20px 0;
@@ -445,10 +469,14 @@
     color: white;
   }
 
+  .layout-btns button {
+    color: white;
+  }
+
   .basic-search,
   .employee-card,
   .advanced-search,
-  .grid-card {
+  .employee-grid-list.list > .grid-card {
     background-color: $bg-secondary;
   }
 
@@ -467,6 +495,12 @@
     background-color: $bg-secondary;
     img {
       border-radius: 90%;
+    }
+  }
+
+  @media (min-width: 768px) {
+    .info {
+      color: white;
     }
   }
 }
